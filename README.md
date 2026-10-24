@@ -20,8 +20,8 @@ Here is the list of daily and modular backend practice projects:
 
 | Module / Day | Project Name | Main Focus / Topics | Status |
 | :--- | :--- | :--- | :--- |
-| **Module 01** | `node-basic-server` | Node.js Core Modules, HTTP Module, File System | Completed |
-| **Module 02** | `express-intro` | Express.js Setup, Routing, Middleware | Completed |
+| **Module 43** | `node-basic-server` | Node.js Core Modules, HTTP Module, File System | Completed |
+| **Module 44** | `express-intro` | Express.js Setup, Routing, Middleware | Progress |
 | **Module 03** | `mongodb-crud` | MongoDB Native Driver, CRUD Operations | In Progress |
 | **Module 04** | `mongoose-schemas` | Mongoose ODM, Schema, Models & Validation | Upcoming |
 
