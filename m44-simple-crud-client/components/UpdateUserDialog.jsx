@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -12,20 +13,36 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { redirect } from "next/navigation"
 
 
-const UpdateUserDialog = ({user}) => {
+const UpdateUserDialog = ({ user, triggerClassName = "mx-4" }) => {
 
-  const handleUpdateUser= (e)=>{
+  const handleUpdateUser= async(e)=>{
     e.preventDefault();
-    const formData
+    const formData = new FormData(e.currentTarget);
+    const updateUser = Object.fromEntries(formData.entries());
+
+    const res = await fetch(`http://localhost:5000/users/${user._id}`, {
+      method: 'PATCH',
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updateUser)
+    })
+    const result = await res.json();
+    console.log('update user', result);
+    if(result.modifiedCount > 0){
+      console.log('Update user data successfully');
+      redirect('/users')
+    }
   }
   return (
     <div>
        <Dialog>
-      <form onSubmit={handleUpdateUser}>
-        <DialogTrigger render={<Button className="mx-4" variant="outline">Edit User</Button>} />
+        <DialogTrigger render={<Button className={triggerClassName} variant="outline">Edit User</Button>} />
         <DialogContent className="sm:max-w-sm">
+      <form onSubmit={handleUpdateUser}>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
@@ -47,8 +64,8 @@ const UpdateUserDialog = ({user}) => {
             <DialogClose render={<Button variant="outline">Cancel</Button>} />
             <Button type="submit">Save changes</Button>
           </DialogFooter>
-        </DialogContent>
       </form>
+        </DialogContent>
     </Dialog>
     </div>
   );
